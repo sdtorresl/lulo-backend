@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{category.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{category.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/categorys/add}" th:text="#{category.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/utils::searchFilter(object='category')}" />
+            <div th:if="${categorys.empty}" th:text="#{category.list.empty}" />
+            <div th:if="${!categorys.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{category.id.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{category.name.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{category.type.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{category.file.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{category.business.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="category : ${categorys}" class="odd:bg-gray-100">
+                            <td th:text="${category.id}" class="p-2" />
+                            <td th:text="${category.name}" class="p-2" />
+                            <td th:text="${category.type}" class="p-2" />
+                            <td th:text="${category.file}" class="p-2" />
+                            <td th:text="${category.business}" class="p-2" />
+                            <td class="p-2">
+                                <div class="float-right whitespace-nowrap">
+                                    <a th:href="@{/categorys/edit/{id}(id=${category.id})}" th:text="#{category.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <form th:action="@{/categorys/delete/{id}(id=${category.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="inline">
+                                        <button th:text="#{category.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:replace="~{fragments/utils::pagination()}" />
+        </div>
+    </body>
+</html>

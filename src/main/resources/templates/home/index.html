@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{home.index.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <h1 th:text="#{home.index.headline}" class="grow text-3xl md:text-4xl font-medium mb-8" />
+            <p th:utext="#{home.index.text}" class="mb-4" />
+            <p th:utext="#{home.index.swagger}" class="mb-12" />
+            <div class="md:w-2/5 mb-12">
+                <h4 th:text="#{home.index.exploreEntities}" class="text-2xl font-medium mb-4" />
+                <div class="flex flex-col border border-gray-300 rounded">
+                    <a th:href="@{/customers}" th:text="#{customer.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b rounded-t px-4 py-2" />
+                    <a th:href="@{/businesss}" th:text="#{business.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/businessUsers}" th:text="#{businessUser.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/files}" th:text="#{file.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/categorys}" th:text="#{category.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/addresss}" th:text="#{address.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/pets}" th:text="#{pet.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/products}" th:text="#{product.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/transactions}" th:text="#{transaction.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/users}" th:text="#{user.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/orders}" th:text="#{order.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 rounded-b px-4 py-2" />
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

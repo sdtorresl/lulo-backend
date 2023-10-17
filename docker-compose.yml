@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:15.3
+    environment:
+    - POSTGRES_DB=lulo
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=P4ssword!
+    ports:
+    - 5433:5432

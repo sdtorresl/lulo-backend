@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{order.add.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{order.add.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/orders}" th:text="#{order.add.back}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('order')}" />
+            <form th:action="${T(co.innovaciones.lulo.util.WebUtils).getRequest().requestURI}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='sessionId')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='subtotal')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='itemDiscount')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='discount')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='tax')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='shipping')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='total')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='content', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='customer', type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='order', field='deliveryAddress', type='select')}" />
+                <input type="submit" th:value="#{order.add.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{file.edit.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{file.edit.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/files}" th:text="#{file.edit.back}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('file')}" />
+            <form th:action="${T(co.innovaciones.lulo.util.WebUtils).getRequest().requestURI}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='file', field='name')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='file', field='url')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='file', field='type')}" />
+                <input type="submit" th:value="#{file.edit.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{businessUser.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{businessUser.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/businessUsers/add}" th:text="#{businessUser.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/utils::searchFilter(object='businessUser')}" />
+            <div th:if="${businessUsers.empty}" th:text="#{businessUser.list.empty}" />
+            <div th:if="${!businessUsers.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{businessUser.id.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{businessUser.profilePicture.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{businessUser.brand.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{businessUser.user.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="businessUser : ${businessUsers}" class="odd:bg-gray-100">
+                            <td th:text="${businessUser.id}" class="p-2" />
+                            <td th:text="${businessUser.profilePicture}" class="p-2" />
+                            <td th:text="${businessUser.brand}" class="p-2" />
+                            <td th:text="${businessUser.user}" class="p-2" />
+                            <td class="p-2">
+                                <div class="float-right whitespace-nowrap">
+                                    <a th:href="@{/businessUsers/edit/{id}(id=${businessUser.id})}" th:text="#{businessUser.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <form th:action="@{/businessUsers/delete/{id}(id=${businessUser.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="inline">
+                                        <button th:text="#{businessUser.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:replace="~{fragments/utils::pagination()}" />
+        </div>
+    </body>
+</html>

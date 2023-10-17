@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{address.add.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{address.add.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/addresss}" th:text="#{address.add.back}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('address')}" />
+            <form th:action="${T(co.innovaciones.lulo.util.WebUtils).getRequest().requestURI}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='address', field='address')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='address', field='line1')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='address', field='line2')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='address', field='city')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='address', field='province')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='address', field='country')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='address', field='postalCode', type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='address', field='customer', type='select')}" />
+                <input type="submit" th:value="#{address.add.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>

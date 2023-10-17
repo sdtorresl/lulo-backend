@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{pet.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{pet.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/pets/add}" th:text="#{pet.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/utils::searchFilter(object='pet')}" />
+            <div th:if="${pets.empty}" th:text="#{pet.list.empty}" />
+            <div th:if="${!pets.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{pet.id.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{pet.name.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{pet.birthdate.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{pet.type.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{pet.breed.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{pet.owner.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{pet.profilePicture.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="pet : ${pets}" class="odd:bg-gray-100">
+                            <td th:text="${pet.id}" class="p-2" />
+                            <td th:text="${pet.name}" class="p-2" />
+                            <td th:text="${pet.birthdate}" class="p-2" />
+                            <td th:text="${pet.type}" class="p-2" />
+                            <td th:text="${pet.breed}" class="p-2" />
+                            <td th:text="${pet.owner}" class="p-2" />
+                            <td th:text="${pet.profilePicture}" class="p-2" />
+                            <td class="p-2">
+                                <div class="float-right whitespace-nowrap">
+                                    <a th:href="@{/pets/edit/{id}(id=${pet.id})}" th:text="#{pet.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <form th:action="@{/pets/delete/{id}(id=${pet.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="inline">
+                                        <button th:text="#{pet.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:replace="~{fragments/utils::pagination()}" />
+        </div>
+    </body>
+</html>
